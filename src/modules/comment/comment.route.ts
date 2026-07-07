@@ -5,7 +5,6 @@ import { Role } from "../../../generated/prisma/enums";
 
 const router = Router();
 
-router.get("/", commentController.getAllComment);
 router.get("/:commentId", commentController.getSingleComment);
 router.get("/author/:authorId", commentController.getCommentByAuthorId);
 router.post(
@@ -13,7 +12,7 @@ router.post(
   auth(Role.ADMIN, Role.AUTHOR, Role.USER),
   commentController.createComment,
 );
-router.put(
+router.patch(
   "/:commentId",
   auth(Role.ADMIN, Role.AUTHOR, Role.USER),
   commentController.updateComment,
@@ -24,6 +23,6 @@ router.delete(
   commentController.deleteComment,
 );
 
-router.put('/:commentId/moderate', commentController.moderateComment)
+router.put("/:commentId/moderate", commentController.moderateComment);
 
 export const commentRouter = router;
