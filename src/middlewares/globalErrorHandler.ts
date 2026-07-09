@@ -27,10 +27,10 @@ export const globalErrorHandler = (
         "An operation failed because it depends on one or more records that were required but not found.";
     }
   } else if (err instanceof Prisma.PrismaClientInitializationError) {
-      if (err.errorCode==="P1001") {
+      if (err.errorCode==="P1000") {
           statusCode = httpStatus.UNAUTHORIZED;
           errorMessage = "Authentication failed against database server. Please check your credentials.";
-      } else if (err.errorCode === "") {
+      } else if (err.errorCode === "P1001") {
           statusCode = httpStatus.BAD_REQUEST
           errorMessage = "Can't reach database server";
       }
